@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+
+<body>
+
+	<section>
+
+
+
+		<div class="container col-md-4 offset-md-4 shadow p-2 my-3 bg-body rounded bg-light">
+
+
+			<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert text-center"
+				role="alert">
+				<p th:text="${session.message.content}"></p>
+				<th:block th:text="${@sessionHelper.removeAttributeFromSession('message')}"></th:block>
+			</div>
+
+			<div class="container" style="display: flex; align-items: center; justify-content: center;">
+				<img style="width: 40px;" th:src="@{/images/contract.png}" alt="" class="src" />
+				<h1 class="text-center mx-2" th:text="${page}">Register here !!</h1>
+			</div>
+
+
+			<hr>
+
+
+			<form  action="" th:action="@{/do_register}" class="formClass" method="post"
+				style="width: 70%; margin: auto;">
+
+				<div class="form-group my-3">
+					<label for="userFormControlInput1">User Id :</label>
+					<input type="text" name="userId" class="form-control" id="userFormControlInput1"
+						placeholder="eg.ambitiousme___" th:value="${user.userId}" required="required"
+						th:classappend="${#fields.hasErrors('user.userId') ? 'is-invalid' : ''}">
+
+					<div class="invalid-feedback" th:each="e : ${#fields.errors('user.userId')}" th:text="${e}">
+
+					</div>
+				</div>
+
+
+				<div class="form-group my-3">
+					<label for="userFormControlInput2">User Name :</label>
+					<input type="text" name="userName" class="form-control" id="userFormControlInput2"
+						placeholder="eg.Shivam Sharma" th:value="${user.userName}" required="required"
+						th:classappend="${#fields.hasErrors('user.userName') ? 'is-invalid' : ''}">
+
+					<div class="invalid-feedback" th:each="e : ${#fields.errors('user.userName')}" th:text="${e}">
+
+					</div>
+				</div>
+
+				<div class="form-group my-3">
+					<label for="userFormControlInput3">Password :</label>
+					<input type="password" name="password" class="form-control" id="userFormControlInput3"
+						placeholder="maintain strong password" required="required"
+						th:classappend="${#fields.hasErrors('user.password') ? 'is-invalid' : ''}">
+
+					<div class="invalid-feedback" th:each="e : ${#fields.errors('user.password')}" th:text="${e}">
+
+					</div>
+				</div>
+
+				<div class="form-group  my-3 ">
+					<input type="checkbox" name="CheckBox" id="showPass" onclick="seePassword()">
+					<label for="showPass">Show Password</label>
+				</div>
+
+				<div class="form-group my-3">
+					<label for="userFormControlInput4">Email Address :</label>
+					<input type="email" name="mail" class="form-control" id="userFormControlInput4"
+						placeholder="name@example.com" th:value="${user.mail}" required="required"
+						th:classappend="${#fields.hasErrors('user.mail') ? 'is-invalid' : ''}">
+
+					<div class="invalid-feedback" th:each="e : ${#fields.errors('user.mail')}" th:text="${e}">
+
+					</div>
+				</div>
+
+				<div class="form-group my-3">
+					<label for="userFormControlInput5">Select Role</label>
+					<select class="form-control" name="role" id="userFormControlInput5" th:value="${user.role}"
+						required="required">
+						<option>Admin</option>
+						<option>Non - Admin</option>
+					</select>
+				</div>
+
+				<div class="form-group  mb-5 ">
+					<input type="checkbox" name="CheckBox" id="userFormControlInput6" required="required">
+					<label for="userFormControlInput6">Apply Terms and Conditions</label>
+				</div>
+
+				<div style="text-align: center;">
+					<button type="submit" name="Register" class="btn btn-lg btn-success ">Submit</button>
+					<button type="reset" name="Reset" class="btn btn-lg btn-danger "> Reset </button>
+				</div>
+
+
+
+			</form>
+		</div>
+
+
+
+
+	</section>
+
+</body>
+
+</html>
